@@ -1,13 +1,20 @@
 import express from "express";
+import morgan from "morgan";
 
-
+const PORT = 4000
 const app = express();
+const logger = morgan("dev")
 
-app.get("/", (req, res)=>{
-    res.send("h1")
+const gossipMiddleware = (req, res, next) => {
+    console.log(`메소드는 ${req.method} URL은 ${req.url}`)
+    next()
+}
+
+app.use(logger)
+app.get("/", (req, res) => {
+    res.send("this is my server")
 })
 
-
-app.listen(4000, () => {
-    console.log('server listen port 4000 🚀')
+app.listen(PORT, () => {
+    console.log(`server listen port ${PORT} 🚀`)
 })
