@@ -1,0 +1,27 @@
+{
+  "name": "recipe",
+  "version": "1.0.0",
+  "description": "cooking recipe website",
+  "scripts": {
+    "dev": "nodemon --exec babel-node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wihyanghoon/recipe_back.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wihyanghoon/recipe_back/issues"
+  },
+  "homepage": "https://github.com/wihyanghoon/recipe_back#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/node": "^7.20.7",
+    "@babel/preset-env": "^7.20.2",
+    "nodemon": "^2.0.22"
+  }
+}
