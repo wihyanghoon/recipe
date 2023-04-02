@@ -8,8 +8,13 @@ router.get("/", (req, res) => {
 })
 
 
-router.get("/watch/:id", (req, res) => {
-    res.send("watch")
+router.get("/watch/:id(\\d+)", (req, res) => {
+    res.render("watch")
+})
+
+
+router.get("/edit", (req, res) => {
+    res.render("edit")
 })
 
 router.get("/delete", (req, res) => {
