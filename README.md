@@ -5,6 +5,7 @@
 로그아웃 /user/logout
 프로필 수정 /user/edit
 유저삭제 /user/delete
+유저 불러오기 /user/:id
 
 동영상 업로드 /video
 동영상 삭제 /video/delete
