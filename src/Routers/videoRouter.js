@@ -7,7 +7,6 @@ router.get("/", async (req, res) => {
   console.log("start");
   const result = Video.find({});
   Video.find({}).then(() => {
-    console.log("fdfd");
     res.render("home", { pageTitle: "Home", videos: [] });
   });
 });
@@ -18,26 +17,32 @@ router.get("/:id([0-9a-f]{24})", async (req, res) => {
   video
     ? res.render("watch", { pageTitle: video.title, video })
     : res.render("404", { pageTitle: "video not fonud" });
-  console.log(video);
 });
 
 router.get("/:id([0-9a-f]{24})/edit", async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id);
-  if(!video) {
-    return res.render("404",{ pageTitle : "page is not found"})
+  if (!video) {
+    return res.render("404", { pageTitle: "page is not found" });
   }
-  res.render("edit", { pageTitle: "change video", video})
+  res.render("edit", { pageTitle: "change video", video });
 });
 
-router.get("/:id([0-9a-f]{24})/edit", async (req, res) => {
-    const { id } = req.params;
-    const video = await Video.findById(id);
-    if(!video) {
-      return res.render("404",{ pageTitle : "page is not found"})
-    }
-    res.render("edit", { pageTitle: "change video", video})
+router.post("/:id([0-9a-f]{24})/edit", async (req, res) => {
+  const { id } = req.params;
+  const { title, description, hashtags } = req.body;
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.render("404", { pageTitle: "page is not found" });
+  }
+  const update = await Video.findByIdAndUpdate(id, {
+    title,
+    description,
+    hashTags: Video.formatHashtags(hashtags)
   });
+  console.log(update)
+  res.redirect(`/videos/${id}`);
+});
 
 router.get("/upload", (req, res) => {
   res.render("upload", { pageTitle: "upload" });
@@ -50,11 +55,9 @@ router.post("/upload", async (req, res) => {
     const dbVideo = await Video.create({
       title,
       description,
-      hashTags: hashtags
-      .split(",")
-      .map((item) => (item.startsWith("#") ? item : `#${word}`)),
+      hashTags: Video.formatHashtags(hashtags)
+        
     });
-    console.log(dbVideo);
     return res.redirect("/");
   } catch (error) {
     console.log(error);
@@ -64,5 +67,13 @@ router.post("/upload", async (req, res) => {
     });
   }
 });
+
+
+// 삭제
+router.get("/:id([0-9a-f]{24})/delete", async (req, res) => {
+  const { id } = req.params
+  await Video.findByIdAndDelete(id)
+  return res.redirect("/")
+})
 
 export default router;
