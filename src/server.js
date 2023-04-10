@@ -1,26 +1,43 @@
-import "./db"
-import "./models/Video"
+
+import "./db";
+import "./models/Video";
 import express from "express";
 import morgan from "morgan";
-
+import session from "express-session";
+import MongoStore from "connect-mongo";
 //router
-import globalRouter from "./Routers/globalRouter"
-import userRouter from "./Routers/userRouter"
-import videoRouter from "./Routers/videoRouter"
+import globalRouter from "./Routers/globalRouter";
+import userRouter from "./Routers/userRouter";
+import videoRouter from "./Routers/videoRouter";
+import { localsMiddleware } from "./middlewares";
 
+const app = express();
+const logger = morgan("dev");
 
-const app = express()
-const logger = morgan("dev")
+app.use(
+  session({
+    secret: process.env.COOKIE_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.DB_URL,
+    }),
+  })
+);
+
+app.use(localsMiddleware);
+app.use(logger);
+app.set("view engine", "pug");
+app.set("views", `${process.cwd()}/src/views`);
+app.use(express.urlencoded({ extended: true })); // 프론트에서 넘어온 값 req.body 인코딩
+
+app.get("/add-one", (req, res, next) => {
+  return res.send(`${req.session.id}`);
+});
 
 //Routers
-app.use(logger)
-app.set("view engine", "pug")
-app.set("views", `${process.cwd()}/src/views`)
-app.use(express.urlencoded({ extended: true })) // 프론트에서 넘어온 값 req.body 인코딩
-app.use("/", globalRouter)
-app.use("/users", userRouter)
-app.use("/videos", videoRouter)
+app.use("/", globalRouter);
+app.use("/users", userRouter);
+app.use("/videos", videoRouter);
 
-export default app
-
-
+export default app;

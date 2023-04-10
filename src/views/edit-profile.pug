@@ -1,0 +1,11 @@
+extends base.pug
+
+block content
+    form(method="POST")
+        input(placeholder="name", name="name", required, type="text" value=user.name)
+        input(placeholder="email", name="email", required, type="email" value=user.email)
+        input(placeholder="location", name="location", required, type="text" value=user.location)
+        input(type="submit", value="Update Profile")
+
+        hr
+        a(href="change-password") change password &rarr;

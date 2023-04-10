@@ -1,0 +1,16 @@
+extends base.pug
+
+
+block content
+    form(method="POST")
+        span=errorMessage
+        input(placeholder="email", name="email", required, type="email")
+        input(placeholder="password", name="password", required, type="password")
+        input(type="submit", value="login")
+        br
+        a(href="/users/github/start") Git hub &rarr;
+    hr
+    div
+        span 아이다가 없으신가요?
+        a(href="/users/join") 회원가입 바로가기 &rarr;
+        

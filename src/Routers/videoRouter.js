@@ -1,5 +1,6 @@
 import express from "express";
 import Video from "../models/Video";
+import { isLoggedIn } from "../middlewares";
 
 const router = express.Router();
 
@@ -11,7 +12,7 @@ router.get("/", async (req, res) => {
   });
 });
 
-router.get("/:id([0-9a-f]{24})", async (req, res) => {
+router.get("/:id([0-9a-f]{24})", isLoggedIn,async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id);
   video
@@ -19,7 +20,7 @@ router.get("/:id([0-9a-f]{24})", async (req, res) => {
     : res.render("404", { pageTitle: "video not fonud" });
 });
 
-router.get("/:id([0-9a-f]{24})/edit", async (req, res) => {
+router.get("/:id([0-9a-f]{24})/edit", isLoggedIn,async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id);
   if (!video) {
@@ -28,7 +29,7 @@ router.get("/:id([0-9a-f]{24})/edit", async (req, res) => {
   res.render("edit", { pageTitle: "change video", video });
 });
 
-router.post("/:id([0-9a-f]{24})/edit", async (req, res) => {
+router.post("/:id([0-9a-f]{24})/edit", isLoggedIn, async (req, res) => {
   const { id } = req.params;
   const { title, description, hashtags } = req.body;
   const video = await Video.findById(id);
@@ -49,7 +50,7 @@ router.get("/upload", (req, res) => {
 });
 
 // 비디오 추가 로직
-router.post("/upload", async (req, res) => {
+router.post("/upload", isLoggedIn,async (req, res) => {
   const { title, description, hashtags } = req.body;
   try {
     const dbVideo = await Video.create({
@@ -70,7 +71,7 @@ router.post("/upload", async (req, res) => {
 
 
 // 삭제
-router.get("/:id([0-9a-f]{24})/delete", async (req, res) => {
+router.get("/:id([0-9a-f]{24})/delete", isLoggedIn,async (req, res) => {
   const { id } = req.params
   await Video.findByIdAndDelete(id)
   return res.redirect("/")
