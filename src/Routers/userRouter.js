@@ -1,7 +1,9 @@
 import express from "express";
 import User from "../models/User";
+import Video from "../models/Video"
 import fetch from "node-fetch";
-import { isLoggedIn } from "../middlewares";
+import { isLoggedIn, uploadProfile, } from "../middlewares";
+import bcrypt from "bcrypt"
 
 const router = express.Router();
 
@@ -115,22 +117,58 @@ router.get("/edit", isLoggedIn, (req, res) => {
   res.render("edit-profile", { pageTitle: "Edit Profile" });
 });
 
-router.post("/edit", isLoggedIn, async (req, res) => {
+router.post("/edit", isLoggedIn, uploadProfile.single("avatar"), async (req, res) => {
+  const { file } = req
+  
   const { email: sessionEmail } = req.session.user;
   const { name, email, location } = req.body;
   console.log(name, email, location);
-  const update = await User.findOneAndUpdate({ email: sessionEmail }, { name, location }, { new: true })
-  console.log(update)
-  req.session.user = update
-  res.redirect("/users/edit")
+  const update = await User.findOneAndUpdate(
+    { email: sessionEmail },
+    { name, location, avatar: file ? file.path : "" },
+    { new: true }
+  );
+  req.session.user = update;
+  res.redirect("/users/edit");
 });
 
-router.get("change-password", (req, res) => {
-  res.render("change-password", { pageTitle : "change password"})
-})
+router.get("/change-password", (req, res) => {
+  res.render("change-password", { pageTitle: "change password" });
+});
 
-router.post("change-password", (req, res) => {
-  res.redirect("/")
+router.post("/change-password", async (req, res) => {
+  const {
+    session: {
+      user: { email, password : oldPassword },
+    },
+    body: { password, newPassword, newPasswordCheck },
+  } = req;
+  const ok = await bcrypt.compare(password, oldPassword)
+  
+  if(!ok){
+    return res.status(404).render("change-password", { pageTitle: "Change Password" , errorMessage: "기존 비밀번호가 틀렸습니다."})
+  }
+
+  if(newPassword !== newPasswordCheck) {
+    return res.status(404).render("change-password", { pageTitle: "Change Password" , errorMessage: "비밀번호가 일치하지 않습니다."})
+  }
+
+  const user = await User.findOneAndUpdate(
+    { email },
+    { password: newPassword },
+    { new: true }
+  )
+  user.save();
+  return res.redirect("/logout")
+});
+
+router.get("/:id", async (req, res)=> {
+  const { id } = req.params
+  const user = await User.findById(id).populate("videos")
+  if(!user) {
+    return res.status(404).render("404", { pageTitle : "없는 유저입니다."})
+  }
+  return res.render("profile", { pageTitle: `${user.name} 프로필`, user })
 })
 
 export default router;

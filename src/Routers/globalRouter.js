@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   const video = await Video.find({});
-  console.log(video);
+  
   return res.render("home", { pageTitle: "Home", video });
 });
 
@@ -23,7 +23,7 @@ router.post("/login", async (req, res) => {
     return res.status(400).render("login", { pageTitle: "Login", errorMessage: "아이디가 없습니다."})
   }
   const ok = await bcrypt.compare(password, user.password);
-
+  console.log(user)
   if(!ok) {
     return res.status(400).render("login", { pageTitle: "Login", errorMessage: "비밀번호 틀림"})
   }
@@ -53,5 +53,7 @@ router.get("/search", async (req, res) => {
   }
   res.render("search", { pageTitle: "search", videos });
 });
+
+
 
 export default router;

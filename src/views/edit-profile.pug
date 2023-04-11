@@ -1,11 +1,14 @@
 extends base.pug
 
 block content
-    form(method="POST")
+    img(src="/"+user.avatar width="100px" height="100px" )
+    form(method="POST", enctype="multipart/form-data")
+        label(for="avatar" accept="*/image") Avatar
+        input(type="file" id="avatar" name="avatar")
         input(placeholder="name", name="name", required, type="text" value=user.name)
         input(placeholder="email", name="email", required, type="email" value=user.email)
         input(placeholder="location", name="location", required, type="text" value=user.location)
         input(type="submit", value="Update Profile")
-
-        hr
-        a(href="change-password") change password &rarr;
+        if !user.socialOnly
+            hr
+            a(href="change-password") change password &rarr;

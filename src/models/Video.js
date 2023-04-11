@@ -5,10 +5,12 @@ const videoSchema = new mongoose.Schema({
   description: { type: String, required: true, trim: true, minLength: 20 },
   createAt: { type: Date, required: true, default: Date.now },
   hashTags: [{ type: String, trim: true }],
+  fileUrl: { type: String, required: true },
   meta: {
     views: { type: Number, required: true, default: 0 },
     rating: { type: Number, required: true, default: 0 },
   },
+  owner : { type : mongoose.Schema.Types.ObjectId, required: true, ref: "User"}
 });
 
 // 미들웨어 

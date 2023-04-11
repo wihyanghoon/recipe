@@ -1,9 +1,16 @@
 extends base.pug
 
 block content
+    video(src="/"+video.fileUrl, controls) 
     p=video.description
     small=video.createAt
-    h3 #{video.meta.views} #{video.meta.views === 1 ? "view" : "views"}
-    a(href=`${video._id}/edit`) Edit video &rarr;
     br
-    a(href=`${video._id}/delete`) Delete video &rarr;
+    
+    br
+    h3 #{video.meta.views} #{video.meta.views === 1 ? "view" : "views"}
+    a(href=`/users/${video.owner._id}`) 작성자 : #{video.owner.name}
+    br
+    if user._id === String(video.owner._id)
+        a(href=`${video._id}/edit`) Edit video &rarr;
+        br
+        a(href=`${video._id}/delete`) Delete video &rarr;
