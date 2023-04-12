@@ -1,5 +1,280 @@
 @import "./_variable.scss";
 
 body {
-    background-color: $red;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #F6F6F6;
+    color: mainText;
+}
+
+.wrap {
+    min-height: 100vh;
+    display: flex;
+
+    @media screen and (max-width: 1024px) {
+        flex-direction: column;
+    }
+}
+
+header {
+    min-width: 320px;
+    min-height: 100vh;
+    background-color: $fff;
+    padding: 10px;
+    position: fixed;
+
+    @media screen and (max-width: 1024px) {
+        display: none;
+    }
+
+    nav{
+        margin-top: 70px;
+
+        ul{
+            padding: 20px;
+            li{
+                display: flex;
+                align-items: center;
+                
+                &:hover{
+                    a{
+                        color:#F46119
+                    }
+
+                    svg{
+                        fill: #F46119;
+                    }
+                }
+                a{
+                    padding: 20px;
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                    transition: all 0.3s;
+                }
+            }
+        }
+    }
+}
+
+// 비디오 영역
+.video_wrap {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding-left: 320px;
+    // 비디오 영역 상단 검색 부분
+
+    @media screen and (max-width: 1024px) {
+        padding-left: 0px;
+    }
+
+    .video_wrap_header{
+        width: 100%;
+        height: 75px;
+        background-color: #fff;
+        margin-bottom: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .video_form{
+            display: flex;
+            align-items: center;
+            max-width: 500px;
+            .search_input{
+                border: none;
+                background-color: #F6F6F6;
+                margin-left: 30px;
+                max-width: 900px;
+                height: 40px;
+                display: block;
+                padding: 10px 15px 10px 20px;
+                border-radius: 20px;
+            }
+            .search_button{
+                border: none;
+                background-color: #F46119;
+                color: #fff;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                margin-left: 10px;
+            }
+        }
+    }
+}
+
+// login page
+.login_wrapper{
+    width: 100%;
+    min-height: 100vh;
+    background: url("https://images.pexels.com/photos/159204/game-controller-joystick-joypad-gamepad-159204.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+    background-size: cover;
+    background-position: center center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    .login_wrap{
+        width: 700px;
+        border-radius: 50px;
+        padding: 50px;
+        background-color: #ffffff;
+        .sub_text{
+            display: flex;
+            justify-content: center;
+            span, a{
+                font-size: 14px;
+            }
+        }
+        .sub_text2{
+            margin-top: 20px;
+            a{
+                display: block;
+                text-align: center;
+                font-size: 14px;
+            }
+        }
+        .login_form{
+            
+            input{
+                display: block;
+                width: 100%;
+                background-color: #F2F2F2;
+                border: none;
+                padding: 20px 16px;
+                border-radius: 15px;
+                margin-bottom: 20px;
+                
+                &:nth-child(2){
+                    margin-top: 40px;
+                }
+            }
+            .login_button {
+                background-color: #F46119;
+                color: #fff;
+            }
+        }
+
+        p{
+            text-align: center;
+            color: #646464;
+            margin-top: 30px;
+        }
+
+        a.git{
+            width: 50px;
+            height: 50px;
+            display: block;
+            background: url("https://cdn-icons-png.flaticon.com/512/889/889111.png ");
+            background-size: cover;
+            margin: 0 auto;
+        }
+    }
+}
+
+// 회원가입
+.login_wrapper{
+    width: 100%;
+    min-height: 100vh;
+    background: url("https://images.pexels.com/photos/159204/game-controller-joystick-joypad-gamepad-159204.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+    background-size: cover;
+    background-position: center center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+
+    .join_wrap{
+        width: 700px;
+        border-radius: 50px;
+        padding: 50px;
+        background-color: #ffffff;
+
+        .sub_text{
+            display: flex;
+            justify-content: center;
+            span, a{
+                font-size: 14px;
+            }
+        }
+        .join_form{
+            
+            input{
+                display: block;
+                width: 100%;
+                background-color: #F2F2F2;
+                border: none;
+                padding: 20px 16px;
+                border-radius: 15px;
+                margin-bottom: 20px;
+                
+            }
+
+            .join_button {
+                background-color: #F46119;
+                color: #fff;
+            }
+        }
+    }
+}
+
+// 메인 비디오 플렉스
+.videos_wrap {
+    display: flex;
+    width: calc(100% - 32px);
+    margin: 0 auto;
+    gap: 20px;
+    flex-wrap: wrap;
+    min-height: 100vh;
+    align-content: flex-start;
+    div {
+        padding: 13px;
+        border-radius: 14px;
+        background-color: #fff;
+        width: calc((100% - 60px) / 4);
+
+        @media screen and (max-width: 1340px) {
+            width: calc((100% - 40px) / 3);
+        }
+
+        @media screen and (max-width: 1340px) {
+            width: calc((100% - 20px) / 2);
+        }
+        video {
+            width: 100%;
+        }
+
+        h4{
+            margin-top: 15px;
+            font-size: 21px;
+            font-weight: 500;
+            color: #353535;
+        }
+
+        p{
+            margin-top: 5px;
+            color: #646464;
+            font-size: 14px;
+        }
+
+        ul{
+            margin-top: 5px;
+            li{
+                color: #F46119;
+                font-size: 14px;
+            }
+        }
+
+        small{
+            display: block;
+            font-size: 14px;
+            margin-top: 5px;
+            color: #646464;
+        }
+    }
+}
+
+footer {
+    margin-top: auto;
 }

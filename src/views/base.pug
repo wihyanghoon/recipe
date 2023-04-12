@@ -2,34 +2,10 @@ doctype html
 html(lang="ko")
     head
         title #{pageTitle} | Youtube
-        link(rel="stylesheet" href="https://unpkg.com/mvp.css/mvp.css")
         link(rel="stylesheet" href="/static/css/styles.css")
+        link(rel="preconnect" href="https://fonts.googleapis.com")
+        link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+        link(href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet")
     body
-        header
-            h1=pageTitle
-            nav
-                ul 
-                    li 
-                        a(href="/") Home
-                    li 
-                        a(href="/search") Search
-                    
-                    if loggedIn
-                        li
-                            a(href="/users/edit") Edit Pofile
-                        li 
-                            a(href=`/users/${user._id}`) #{user.name} 의 프로필
-                        li 
-                            a(href="/logout") Log out
-                        li 
-                            a(href="/videos/upload") Upload Video
-                    else 
-                        li 
-                            a(href="/login") Login
-                        li 
-                            a(href="/users/join") Join
-
-        main
-            block content
-        include partials/footer.pug
+        block content
     script(src="/static/js/main.js")

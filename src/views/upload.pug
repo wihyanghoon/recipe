@@ -1,12 +1,16 @@
 extends base.pug
-
+    
 block content 
-    if errorMessage 
-        span=errorMessage
-    form(method="POST" enctype="multipart/form-data")
-        label(for="video") Video File 
-        input(type="file", accept="video/*", required, id="video", name="video")
-        input(name="title" placeholder="Title", type="text", required maxlength=80)
-        input(name="description" placeholder="description", type="text", required, minlength=20)
-        input(name="hashtags" placeholder="hashtag", type="text", required)
-        input(type="submit", value="upload")
+    div.wrap
+        include partials/header.pug
+        div.upload_wrap
+            h1 Video Upload
+            if errorMessage 
+                span=errorMessage
+            form(method="POST" enctype="multipart/form-data").upload_form
+                label(for="video") Video File 
+                input(type="file", accept="video/*", required, id="video", name="video")
+                input(name="title" placeholder="비디오 제목", type="text", required maxlength=80)
+                input(name="description" placeholder="비디오 설명(최소 20자 이상 입력하세요.)", type="text", required, minlength=20)
+                input(name="hashtags" placeholder="해쉬태그(, 사용하여 여러가지 해쉬 태그를 등록하세요)", type="text", required)
+                input(type="submit", value="업로드").upload_button

@@ -2,16 +2,17 @@ extends base.pug
 
 
 block content
-    form(method="POST")
-        span=errorMessage
-        input(placeholder="name", name="name", required, type="text")
-        input(placeholder="email", name="email", required, type="email")
-        input(placeholder="password", name="password", required, type="password")
-        input(placeholder="username", name="username", required, type="text")
-        input(placeholder="location", name="location", required, type="text")
-        input(type="submit", value="join")
-    
-    hr
-    div
-        span 회원가입이 되어있습니까?
-        a(href="/login") login now &arrr;
+    div.login_wrapper
+        div.join_wrap
+            form(method="POST").join_form
+                span=errorMessage
+                input(placeholder="name", name="name", required, type="text")
+                input(placeholder="email", name="email", required, type="email")
+                input(placeholder="password", name="password", required, type="password")
+                input(placeholder="username", name="username", required, type="text")
+                input(placeholder="location", name="location", required, type="text")
+                input(type="submit", value="Join").join_button
+            
+            div.sub_text
+                span 회원가입이 되어있습니까? &nbsp;
+                a(href="/login") Login

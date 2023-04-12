@@ -1,11 +1,11 @@
 mixin video(info)
-    div
+    div.video
         video(src="/"+info.fileUrl, controls) 
         h4
             a(href=`/videos/${info.id}`)=info.title
         p=info.description
+        small=info.createAt
         ul
             each hastag in info.hashTags
                 li=hastag
-        small=info.createAt
-        hr
+        

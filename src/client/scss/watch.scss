@@ -1,0 +1,18 @@
+.video_page_wrap {
+    flex-grow: 1;
+    padding-left: 320px;
+
+    >div{
+        max-width: 900px;
+        max-width: 900px;
+        margin: 110px auto 0 auto;
+
+        video{
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 1024px) {
+        padding-left: 0px;
+    }
+}

@@ -1,8 +1,19 @@
 extends base.pug
 include mixins/video
 
+
 block content
-    each item in video
-        +video(item)
-    else
-        li Sorry nothing found
+    div.wrap
+        include partials/header.pug
+        div.video_wrap
+            div.video_wrap_header
+                form(method="GET").video_form
+                    input(type="text" name="keyword" placeholder="search").search_input
+                    input(type="submit").search_button
+            div.videos_wrap
+                each item in video
+               
+                    +video(item)
+                else
+                    li Sorry nothing found
+            include partials/footer.pug
