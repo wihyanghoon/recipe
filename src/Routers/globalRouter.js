@@ -7,7 +7,7 @@ import { isLoggedIn, isNotLoggedIn } from "../middlewares";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const video = await Video.find({});
+  const video = await Video.find({}).populate("owner");
   
   return res.render("home", { pageTitle: "Home", video });
 });
@@ -23,7 +23,7 @@ router.post("/login", async (req, res) => {
     return res.status(400).render("login", { pageTitle: "Login", errorMessage: "아이디가 없습니다."})
   }
   const ok = await bcrypt.compare(password, user.password);
-  console.log(user)
+
   if(!ok) {
     return res.status(400).render("login", { pageTitle: "Login", errorMessage: "비밀번호 틀림"})
   }
@@ -49,7 +49,7 @@ router.get("/search", async (req, res) => {
         $regex: new RegExp(keyword, "i"),
         // i 소문자 대문자 구분 없이 하게 해주는것
       },
-    });
+    }).populate("owner");
   }
   res.render("search", { pageTitle: "search", videos });
 });

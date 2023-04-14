@@ -27,7 +27,7 @@ export const isNotLoggedIn = (req, res, next) => {
 export const uploadProfile = multer({
   dest: "uploads/avatars/",
   limits: {
-    fileSize: 300,
+    fileSize: 3.146e+7,
   },
 });
 

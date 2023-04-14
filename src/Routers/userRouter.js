@@ -68,7 +68,7 @@ router.get("/github/finsh", async (req, res) => {
         },
       })
     ).json();
-
+      console.log(userData)
     const emailData = await (
       await fetch(`${apiUrl}/user/emails`, {
         headers: {
@@ -76,23 +76,23 @@ router.get("/github/finsh", async (req, res) => {
         },
       })
     ).json();
-
+    
     const emailObj = emailData.find(
       (emails) => emails.primary === true && emails.verified === true
     );
-
+      
     if (!emailObj) {
       return res.redirect("/login");
     }
     const existingUser = await User.findOne({ email: emailObj.email });
-    console.log(existingUser);
+
     if (existingUser) {
       req.session.loggedIn = true;
       req.session.user = existingUser;
       return res.redirect("/");
     } else {
       const user = await User.create({
-        avata: userData.avatar_url,
+        avatar: userData.avatar_url,
         name: userData.name,
         username: userData.login,
         email: emailObj.email,
@@ -102,7 +102,7 @@ router.get("/github/finsh", async (req, res) => {
       });
       req.session.loggedIn = true;
       req.session.user = user;
-      console.log(session);
+      
       return res.redirect("/");
     }
   } else {
@@ -122,10 +122,10 @@ router.post("/edit", isLoggedIn, uploadProfile.single("avatar"), async (req, res
   
   const { email: sessionEmail } = req.session.user;
   const { name, email, location } = req.body;
-  console.log(name, email, location);
+
   const update = await User.findOneAndUpdate(
     { email: sessionEmail },
-    { name, location, avatar: file ? file.path : "" },
+    { name, location, avatar: file ? `/${file.path}` : "" },
     { new: true }
   );
   req.session.user = update;
@@ -137,13 +137,16 @@ router.get("/change-password", (req, res) => {
 });
 
 router.post("/change-password", async (req, res) => {
+  
   const {
     session: {
-      user: { email, password : oldPassword },
+      user: { email, password },
     },
-    body: { password, newPassword, newPasswordCheck },
+    body: { oldPassword, newPassword, newPasswordCheck },
   } = req;
-  const ok = await bcrypt.compare(password, oldPassword)
+
+  
+  const ok = await bcrypt.compare(oldPassword, password)
   
   if(!ok){
     return res.status(404).render("change-password", { pageTitle: "Change Password" , errorMessage: "기존 비밀번호가 틀렸습니다."})
@@ -158,13 +161,19 @@ router.post("/change-password", async (req, res) => {
     { password: newPassword },
     { new: true }
   )
-  user.save();
+  await user.save();
   return res.redirect("/logout")
 });
 
 router.get("/:id", async (req, res)=> {
   const { id } = req.params
-  const user = await User.findById(id).populate("videos")
+  const user = await User.findById(id).populate({
+    path: "videos",
+    populate: {
+      path: "owner",
+      model: "User"
+    }
+  })
   if(!user) {
     return res.status(404).render("404", { pageTitle : "없는 유저입니다."})
   }

@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
 router.get("/:id([0-9a-f]{24})", async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id).populate("owner");
-  console.log(video)
+
   video
     ? res.render("watch", { pageTitle: video.title, video })
     : res.render("404", { pageTitle: "video not fonud" });
@@ -74,7 +74,7 @@ router.post(
       user: { _id },
     } = req.session;
     const { file } = req;
-    console.log(file);
+
     const { title, description, hashtags } = req.body;
     try {
       const dbVideo = await Video.create({

@@ -1,19 +1,14 @@
-extends base.pug
+extends base
+
 
 block content
-    div.login_wrapper
-        div.login_wrap
-            a.git(href="/users/github/start")
-            p or with Email
-            form(method="POST").login_form
-                span=errorMessage
-                input(placeholder="Email", name="email", required, type="email")
-                input(placeholder="Password", name="password", required, type="password")
-                input(type="submit", value="Log In").login_button
-                
-            div.sub_text
-                span 아이다가 없으신가요? &nbsp;
-                a(href="/users/join") Join the website &rarr;
-            div.sub_text2
-                a(href="/") 로그인 없이 이용하기
-        
+    if errorMessage
+        span=errorMessage
+    form(method="POST")
+        input(placeholder="Email", name="email", type="text", required)
+        input(placeholder="Password", name="password", type="password", required)
+        input(type="submit", value="Login")
+        include partials/social-login
+    div.auth-switch
+        span Don't have an account? 
+        a(href="/users/join") Create one now &rarr;
