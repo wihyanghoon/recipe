@@ -8,7 +8,8 @@ module.exports = {
   watch: true,
   entry: {
     main: "./src/client/js/main.js",
-    videoPlayer : "./src/client/js/videoPlayer.js"
+    videoPlayer : "./src/client/js/videoPlayer.js",
+    recorder : "./src/client/js/recorder.js"
   },
   mode: "development",
   output: {
