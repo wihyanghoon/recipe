@@ -22,4 +22,10 @@ router.post("/videos/:id([0-9a-f]{24})/view", async (req, res) => {
   return res.sendStatus(200);
 });
 
+router.post("/videos/:id([0-9a-f]{24})/comment", async (req, res) => {
+    console.log(req.params.id)
+    console.log(req.body)
+    res.end()
+})
+
 export default router;

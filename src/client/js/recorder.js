@@ -1,7 +1,7 @@
 import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
 
 
-const startBtn = document.getElementById("startBtn");
+const actionBtn = document.getElementById("actionBtn");
 const video = document.getElementById("preview");
 
 //전역변수
@@ -9,10 +9,24 @@ let stream;
 let recorder;
 let videoFile;
 
+const files = {
+    input: "recording.webm",
+    output: "output.mp4",
+    thumb: "thumbnail.jpg"
+}
+
+const downloadFile = (fileUrl, fileName) => {
+    const a = document.createElement("a")
+    a.href = fileUrl;
+    a.download = fileName;
+    document.body.appendChild(a)
+    a.click();
+}
+
 const startHandler = () => {
-  startBtn.innerText = "Stop recoding";
-  startBtn.removeEventListener("click", startHandler);
-  startBtn.addEventListener("click", handleStopHandler);
+  actionBtn.innerText = "Stop recoding";
+  actionBtn.removeEventListener("click", startHandler);
+  actionBtn.addEventListener("click", handleStopHandler);
 
   recorder = new MediaRecorder(stream);
 
@@ -28,13 +42,17 @@ const startHandler = () => {
 };
 
 const handleStopHandler = () => {
-  startBtn.innerText = "DownLoad";
-  startBtn.removeEventListener("click", handleStopHandler);
-  startBtn.addEventListener("click", downLoadHandler);
+  actionBtn.innerText = "DownLoad";
+  actionBtn.removeEventListener("click", handleStopHandler);
+  actionBtn.addEventListener("click", downLoadHandler);
   recorder.stop();
 };
 
 const downLoadHandler = async () => {
+    actionBtn.removeEventListener("click", downLoadHandler)
+
+    actionBtn.innerText = "변환중..."
+    actionBtn.disabled = true
     const ffmpeg = createFFmpeg({
         mainName: 'main',
         corePath: 'https://unpkg.com/@ffmpeg/core-st@0.11.1/dist/ffmpeg-core.js',
@@ -43,32 +61,26 @@ const downLoadHandler = async () => {
     await ffmpeg.load();
        
     
-    ffmpeg.FS("writeFile", "recording.webm", await fetchFile(videoFile))
-    await ffmpeg.run("-i", "recording.webm", "-r", "60" ,"output.mp4")
+    ffmpeg.FS("writeFile", files.input, await fetchFile(videoFile))
 
-    await ffmpeg.run("-i", "recording.webm", "-ss", "00:00:01", "-frames:v", "1", "thumbnail.jpg");
+    await ffmpeg.run("-i", files.input, "-r", "60" , files.output)
+    await ffmpeg.run("-i", files.input, "-ss", "00:00:01", "-frames:v", "1", files.thumb);
+    await ffmpeg.runWithPromise("-i", files.input, "-ss", "00:00:01", "-frames:v", "1", files.thumb);
 
-    const mp4File = ffmpeg.FS("readFile", "output.mp4")
-    const thubFile = ffmpeg.FS("readFile", "thumbnail.jpg")
-    console.log(thubFile)
-
+    const mp4File = ffmpeg.FS("readFile", files.output)
+    const thubFile = ffmpeg.FS("readFile", files.thumb)
+    
     const mp4Blob = new Blob([mp4File.buffer], { type: "video/mp4"})
     const thumbBlob = new Blob([thubFile.buffer], {type : "image/jpg"})
 
     const mp4Url = URL.createObjectURL(mp4Blob)
     const thumUrl = URL.createObjectURL(thumbBlob)
 
-    const a = document.createElement("a")
-    a.href = mp4Url;
-    a.download = "myVideo.mp4";
-    document.body.appendChild(a)
-    a.click();
+    downloadFile(mp4Url, "myrecoding.mp4")
+    downloadFile(thumUrl, "MyThumnail.jpg")
 
-    const thumA = document.createElement("a")
-    thumA.href = thumUrl;
-    thumA.download = "MyThumnail.jpg";
-    document.body.appendChild(thumA)
-    thumA.click();
+    actionBtn.disabled = false
+    actionBtn.innerText = "녹화 다시하기"
 };
 
 const init = async () => {
@@ -82,4 +94,4 @@ const init = async () => {
 };
 init();
 
-startBtn.addEventListener("click", startHandler);
+actionBtn.addEventListener("click", startHandler);

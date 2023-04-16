@@ -31,6 +31,7 @@ app.use(logger);
 app.set("view engine", "pug");
 app.set("views", `${process.cwd()}/src/views`);
 app.use(express.urlencoded({ extended: true })); // 프론트에서 넘어온 값 req.body 인코딩
+app.use(express.json())
 app.use("/uploads", express.static("uploads")) // 업로드 폴더 사용할수 있게 설정
 app.use("/static", express.static("assets")) // 웹팩에 사용한 폴더를 읽을수 있게 설정
 app.get("/add-one", (req, res, next) => {

@@ -65,15 +65,9 @@ router.get("/upload", (req, res) => {
 });
 
 // 비디오 추가 로직
-router.post(
-  "/upload",
-  isLoggedIn,
-  uploadVideo.single("video"),
-  async (req, res) => {
-    const {
-      user: { _id },
-    } = req.session;
-    const { file } = req;
+router.post("/upload", isLoggedIn, uploadVideo.fields([{name: "video"}, {name: "thumb"}]), async (req, res) => {
+    const { user: { _id } } = req.session;
+    const { files : { video, thumb } } = req;
 
     const { title, description, hashtags } = req.body;
     try {
@@ -81,7 +75,8 @@ router.post(
         title,
         description,
         hashTags: Video.formatHashtags(hashtags),
-        fileUrl: file.path,
+        fileUrl: video[0].path,
+        thumbUrl: thumb[0].path,
         owner: _id,
       });
       const user = await User.findById(_id)
