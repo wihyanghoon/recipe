@@ -97,7 +97,7 @@ const mouseMoveHandler = () => {
     timeOutId = null;
   }
   if (controlMove) {
-    clearTimeout(controlMove);
+    clearTimeout(controlMove); // settime 취소
     controlMove = null;
   }
   videoControls.classList.add("showing");

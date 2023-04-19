@@ -1,5 +1,11 @@
 // video mixin
 .video-mixin {
+    box-shadow: 0px 0px 20px 0px #dddddd;
+    border-radius: 7px;
+    transition: all 0.3s ease-in-out;
+    &:hover{
+      box-shadow: 0px 0px 20px 0px #bcbcbc;
+    }
     .video-mixin__thumb {
       aspect-ratio: 1.77339901477/1;
       border-radius: 7px;
@@ -7,15 +13,17 @@
       overflow: hidden;
     }
     .video-mixin__data {
-      padding: 0px 15px;
+      padding: 10px 10px;
+      border-radius: 0px 0px 7px 7px;
       .video-mixin__title {
-        font-size: 18px;
+        font-size: 14px;
         display: block;
-        margin-top: 10px;
+        color: $point;
       }
       .video-mixin__meta {
         margin-top: 5px;
         font-size: 12px;
+        color: $gray;
       }
     }
   }

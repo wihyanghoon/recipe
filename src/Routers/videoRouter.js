@@ -5,17 +5,22 @@ import { isLoggedIn, uploadVideo } from "../middlewares";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  const result = Video.find({});
-  Video.find({}).then(() => {
-    res.render("home", { pageTitle: "Home", videos: [] });
-  });
-});
-
 router.get("/:id([0-9a-f]{24})", async (req, res) => {
   const { id } = req.params;
-  const video = await Video.findById(id).populate("owner");
+  const video = await Video.findById(id)
+  .populate({
+    path: "owner",
+    model: "User"
+  })
+  .populate({
+    path: "comments",
+    populate: {
+      path: "owner",
+      model: "User"
+    }
+  });
 
+  console.log(video.comments[0].owner, "populate")
   video
     ? res.render("watch", { pageTitle: video.title, video })
     : res.render("404", { pageTitle: "video not fonud" });
@@ -60,7 +65,7 @@ router.post("/:id([0-9a-f]{24})/edit", isLoggedIn, async (req, res) => {
   res.redirect(`/videos/${id}`);
 });
 
-router.get("/upload", (req, res) => {
+router.get("/upload", isLoggedIn, (req, res) => {
   res.render("upload", { pageTitle: "upload" });
 });
 

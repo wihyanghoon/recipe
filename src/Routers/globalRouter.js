@@ -30,7 +30,7 @@ router.post("/login", async (req, res) => {
   req.session.loggedIn = true;
   req.session.user = user;
   
-  console.log("로그인 성공됬다잉")
+
   return res.redirect("/")
 });
 

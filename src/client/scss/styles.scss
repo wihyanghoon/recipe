@@ -10,31 +10,44 @@
 @import "./components/shared.scss";
 @import "./components/forms.scss";
 @import "./components/social-login.scss";
-@import "./components//video-player.scss";
+@import "./components/video-player.scss";
+@import "./components/comment.scss";
 // Screens
 
 @import "./screens/search.scss";
+@import "./screens/home.scss";
 @import "./screens/profile.scss";
 @import "./screens/edit-profile.scss";
 
 // Defaults
 a {
-  color: inherit;
+  color: $black;
   text-decoration: none;
+
+  &:hover{
+    color: $point;
+  }
+}
+
+*{
+  box-sizing: border-box;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: $bg;
-  color: white;
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+  color: $black;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 main {
   max-width: 1200px;
   width: 100%;
-  margin: 0 auto;
-  margin-top: 50px;
+  margin: 0 auto 40px auto;
+  margin-top: 0px;
   box-sizing: border-box;
   padding: 0px 50px;
+  flex-grow: 1;
 }

@@ -1,10 +1,20 @@
 extends base
 include mixins/video
 
+
+
 block content
-    div.video-grid
-        each item in video
-            +video(item)
-        else
-            span.empty__message No videos found
+    div.main-slide
+        div.text_wrap
+            span Right now 
+            h1 Show Me Your Life 
+            button
+                a(href="/videos/upload") Upload Now
+    div.home_main
+        h4 watch Video
+        div.video-grid
+            each item in video
+                +video(item)
+            else
+                span.empty__message No videos found
 block scripts

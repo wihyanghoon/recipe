@@ -68,7 +68,7 @@ router.get("/github/finsh", async (req, res) => {
         },
       })
     ).json();
-      console.log(userData)
+
     const emailData = await (
       await fetch(`${apiUrl}/user/emails`, {
         headers: {
@@ -174,6 +174,7 @@ router.get("/:id", async (req, res)=> {
       model: "User"
     }
   })
+
   if(!user) {
     return res.status(404).render("404", { pageTitle : "없는 유저입니다."})
   }
