@@ -3,16 +3,17 @@
     display: flex;
     position: relative;
     align-items: center;
-    input {
+    box-shadow: none;
+    input[type="text"] {
       all: unset;
       padding: 15px 20px;
-      border-radius: 5px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      background-color: black;
+      border-bottom: 1px solid #000;
+      background-color: transparent;
       margin-bottom: 5px;
       font-size: 16px;
       color: $black;
       width: 90%;
+      box-shadow: 10px
     }
     button {
       all: unset;

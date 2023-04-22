@@ -2,12 +2,13 @@
 extends base.pug
 
 block content
-    div 
-        video#preview
-        button#actionBtn Start Recording
+    //- div 
+    //-     video#preview
+    //-     button#actionBtn Start Recording
     if errorMessage
         span=errorMessage
     form(method="POST", enctype="multipart/form-data")
+        h2 UPLOAD VIDEO
         label(for="video") FILE
         input(type="file", accept="video/*", required, id="video", name="video")
         label(for="thumb") IMAGE

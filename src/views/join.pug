@@ -6,12 +6,19 @@ block content
     if errorMessage
         span=errorMessage
     form(method="POST")
-        input(placeholder="Name", name="name", type="text", required)
-        input(placeholder="Email", name="email", type="email", required)
-        input(placeholder="Username", name="username", type="text", required)
-        input(placeholder="Password", name="password", type="password", required)
-        input(placeholder="Confirm Password", name="password2", type="password", required)
-        input(placeholder="Location", name="location", type="text", required)
+        h2 SIGN IN
+        label(for="name") NAME 
+        input(placeholder="Name", id="name" name="name", type="text", required)
+        label(for="email") EMAIL 
+        input(placeholder="Email", id="eamil" name="email", type="email", required)
+        label(for="username") USER NAME 
+        input(placeholder="Username", id="username" name="username", type="text", required)
+        label(for="password") PASSWORD 
+        input(placeholder="Password", id="password" name="password", type="password", required)
+        label(for="password2") PASSWORD CHECK
+        input(placeholder="Confirm Password", id="password2" name="password2", type="password", required)
+        label(for="location") LOCATON 
+        input(placeholder="Location", id="location" name="location", type="text", required)
         input(type="submit", value="Join")
         include partials/social-login
     div.auth-switch

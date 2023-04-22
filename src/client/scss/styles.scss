@@ -50,4 +50,20 @@ main {
   box-sizing: border-box;
   padding: 0px 50px;
   flex-grow: 1;
+
+  @media screen and (max-width:680px) {
+    &{
+      padding: 0px 18px;
+    }
+  }
+}
+
+.top__img{
+  width: 100%;
+  aspect-ratio: 2/0.5;
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5) ), url("https://images.pexels.com/photos/725255/pexels-photo-725255.jpeg?auto=compress&cs=tinysrgb&w=800");
+  background-position: center;
+  background-size: cover;
+  padding: 30px;
+  color: #fff;
 }

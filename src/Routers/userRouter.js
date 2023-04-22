@@ -178,6 +178,7 @@ router.get("/:id", async (req, res)=> {
   if(!user) {
     return res.status(404).render("404", { pageTitle : "없는 유저입니다."})
   }
+  console.log(user)
   return res.render("profile", { pageTitle: `${user.name} 프로필`, user })
 })
 

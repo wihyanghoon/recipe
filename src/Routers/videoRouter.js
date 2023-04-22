@@ -20,7 +20,7 @@ router.get("/:id([0-9a-f]{24})", async (req, res) => {
     }
   });
 
-  console.log(video.comments[0].owner, "populate")
+  
   video
     ? res.render("watch", { pageTitle: video.title, video })
     : res.render("404", { pageTitle: "video not fonud" });
@@ -110,6 +110,9 @@ router.get("/:id([0-9a-f]{24})/delete", isLoggedIn, async (req, res) => {
   }
   
   await Video.findByIdAndDelete(id);
+  // const videoUser = await User.findById(_id)
+  // videoUser.videos.pop(_id)
+  // videoUser.save()
   return res.redirect("/");
 });
 

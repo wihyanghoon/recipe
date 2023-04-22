@@ -2,6 +2,7 @@ extends base
 
 block content
     form(method="POST", enctype="multipart/form-data").edit-profile__form
+        h2 PROFILE EDIT
         label(for="avatar") Avatar
         input(type="file", id="avatar", name="avatar", accept="image/*")
         label(for="name") NAME

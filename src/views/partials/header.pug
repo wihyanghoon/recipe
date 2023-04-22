@@ -32,11 +32,12 @@ header
         ul
             if loggedIn
                 li
-                    a(href=`/users/${user._id}`)
-                        if user.avatar === ""
-                            span 😀
-                        else
+                    if user.avatar === ""
+                        span 😀
+                    else
+                        a(href=`/users/${user._id}`).user_menu
                             img.header__avatar(src=user.avatar)
+                            span=user.email
                 li
                     a(href="/videos/upload") Upload Video
                 li
