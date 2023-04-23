@@ -1,6 +1,9 @@
 mixin comment(info)
-    li.comment__wrap
+    li(data-id=info._id).comment__wrap
         img(src=info.owner.avatar).comment__img
         div.comment__text
             a(href=`/users/${info.owner._id}`) #{info.owner.email}
             p=info.text
+        if String(info.owner._id) === String(user._id)
+            div.comment__delete
+                span

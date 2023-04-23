@@ -38,11 +38,11 @@ block content
     if loggedIn
         div.video__comments
             form.video__comments-form#commentForm
-                input(cols="30" rows="10" placeholder="댓글")
+                input(cols="30" rows="10" placeholder="Write a comment")
                 button 작성
     div.comments__wrap
         ul 
-            each comment in video.comments
+            each comment in video.comments.reverse()
                 +comment(comment)
     
   

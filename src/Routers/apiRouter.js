@@ -1,6 +1,7 @@
 import express from "express";
 import Video from "../models/Video";
-import Comment from '../models/Comment';
+import Comment from "../models/Comment";
+import User from "../models/User";
 
 const router = express.Router();
 
@@ -28,10 +29,12 @@ router.post("/videos/:id([0-9a-f]{24})/comment", async (req, res) => {
     body: { text },
     session: { user },
   } = req;
-  const video = await Video.findById(id)
+  const video = await Video.findById(id);
+  const findUser = await User.findById(user._id)
 
-  if(!video){
-    return res.sendStatus(404)
+
+  if (!video) {
+    return res.sendStatus(404);
   }
 
   const comment = await Comment.create({
@@ -39,10 +42,34 @@ router.post("/videos/:id([0-9a-f]{24})/comment", async (req, res) => {
     owner: user._id,
     video: id,
   })
+
+  const populatedComment = await Comment.findById(comment._id).populate({
+    path: "owner",
+    model: "User"
+  });
   
-  video.comments.push(comment._id)
+
+  findUser.comments.push(comment._id)
+  findUser.save()
+  
+  video.comments.push(comment._id);
+  video.save();
+  console.log(comment)
+  return res.status(200).json({ comment : populatedComment });
+});
+
+router.post("/videos/:id([0-9a-f]{24})/comment/:commentId([0-9a-f]{24})/delete", async (req, res) => {
+  const { id, commentId } = req.params;
+  const { user } = req.session
+
+  await Comment.findByIdAndDelete(commentId)
+
+  const video = await Video.findById(id)
+  video.comments.pop(commentId)
   video.save()
-  res.sendStatus(200)
+
+
+  res.sendStatus(200);
 });
 
 export default router;

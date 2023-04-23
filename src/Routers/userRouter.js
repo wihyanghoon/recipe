@@ -168,17 +168,19 @@ router.post("/change-password", async (req, res) => {
 router.get("/:id", async (req, res)=> {
   const { id } = req.params
   const user = await User.findById(id).populate({
-    path: "videos",
+    path: "videos", // 찾을 데이터의 키값을 가지고 있는
     populate: {
       path: "owner",
       model: "User"
     }
   })
 
+  console.log(user)
+
   if(!user) {
     return res.status(404).render("404", { pageTitle : "없는 유저입니다."})
   }
-  console.log(user)
+
   return res.render("profile", { pageTitle: `${user.name} 프로필`, user })
 })
 

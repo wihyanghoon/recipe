@@ -110,9 +110,11 @@ router.get("/:id([0-9a-f]{24})/delete", isLoggedIn, async (req, res) => {
   }
   
   await Video.findByIdAndDelete(id);
-  // const videoUser = await User.findById(_id)
-  // videoUser.videos.pop(_id)
-  // videoUser.save()
+  
+  const videoUser = await User.findById(_id)
+  videoUser.videos.pop(_id)
+  videoUser.save()
+  
   return res.redirect("/");
 });
 

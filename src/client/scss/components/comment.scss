@@ -1,7 +1,9 @@
 .comment__wrap{
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     gap: 20px;
+    position: relative;
 }
 
 .comment__img{
@@ -59,10 +61,29 @@
             box-sizing: border-box;
             border-radius: 20px;
             display: block;
-            padding: 0px 20px;
+            padding: 10px 0px;
             width: 70px;
             color: #fff;
             cursor: pointer;
         }
+    }
+}
+
+.comment__delete {
+    width: 30px;
+    height: 30px;
+    background-color: rgb(235, 38, 50);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    span{
+        display: block;
+        width: 15px;
+        height: 3px;
+        background-color: #fff;
+        border-radius: 5px;
     }
 }
