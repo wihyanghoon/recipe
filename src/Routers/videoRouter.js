@@ -2,6 +2,7 @@ import express from "express";
 import Video from "../models/Video";
 import User from "../models/User";
 import { isLoggedIn, uploadVideo } from "../middlewares";
+import { isDeploy } from "../middlewares";
 
 const router = express.Router();
 
@@ -73,6 +74,7 @@ router.get("/upload", isLoggedIn, (req, res) => {
 router.post("/upload", isLoggedIn, uploadVideo.fields([{name: "video"}, {name: "thumb"}]), async (req, res) => {
     const { user: { _id } } = req.session;
     const { files : { video, thumb } } = req;
+    console.log(req.files)
 
     const { title, description, hashtags } = req.body;
     try {
@@ -80,8 +82,8 @@ router.post("/upload", isLoggedIn, uploadVideo.fields([{name: "video"}, {name: "
         title,
         description,
         hashTags: Video.formatHashtags(hashtags),
-        fileUrl: video[0].path,
-        thumbUrl: thumb[0].path,
+        fileUrl: isDeploy ? `/${video[0].path}` : video[0].location,
+        thumbUrl: isDeploy ? `/${video[0].path}` : thumb[0].location,
         owner: _id,
       });
       const user = await User.findById(_id)
