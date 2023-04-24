@@ -27,7 +27,9 @@ app.use(
   })
 );
 
-app.use(cors());
+app.use(cors({
+  origin: "https://recipevideo.herokuapp.com/"
+}));
 app.use(localsMiddleware);
 app.use(logger);
 app.set("view engine", "pug");
