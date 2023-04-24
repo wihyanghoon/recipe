@@ -61,7 +61,9 @@ const submitHandler = async (event) => {
 
 const deleteHandler = (event) => {
   const { id } = videoContainer.dataset;
-  const { id: commentId } = event.target.parentNode.dataset;
+  const { id: commentId } = event.currentTarget.parentNode.dataset;
+
+  event.currentTarget.parentNode.remove();
 
   fetch(`/api/videos/${id}/comment/${commentId}/delete`, {
     method: "POST",
