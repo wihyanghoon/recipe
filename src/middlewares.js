@@ -12,13 +12,13 @@ const s3 = new aws.S3({
 
 const s3Images = multerS3({
   s3: s3,
-  bucket: "recipevideodb/images",
+  bucket: "recipevideodb-image",
   acl: "public-read",
 });
 
 const s3Videos = multerS3({
   s3: s3,
-  bucket: "recipevideodb/videos",
+  bucket: "recipevideodb-video",
   acl: "public-read",
 });
 
