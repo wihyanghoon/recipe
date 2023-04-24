@@ -125,7 +125,7 @@ router.post("/edit", isLoggedIn, uploadProfile.single("avatar"), async (req, res
 
   const update = await User.findOneAndUpdate(
     { email: sessionEmail },
-    { name, location, avatar: file ? `/${file.location}` : "" },
+    { name, location, avatar: file ? `${file.location}` : "" },
     { new: true }
   );
   req.session.user = update;
