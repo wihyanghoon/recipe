@@ -1,6 +1,6 @@
 mixin comment(info)
     li(data-id=info._id).comment__wrap
-        img(src=info.owner.avatar).comment__img
+        img(src=info.owner.avatar crossorigin).comment__img
         div.comment__text
             a(href=`/users/${info.owner._id}`) #{info.owner.email}
             p=info.text

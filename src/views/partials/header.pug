@@ -20,7 +20,7 @@ header
                         if user.avatar === ""
                             span 😀
                         else
-                            img.header__avatar(src=user.avatar)
+                            img.header__avatar(src=user.avatar crossorigin)
             else
                 li
                     a(href="/login")  Login                        
@@ -36,7 +36,7 @@ header
                         span 😀
                     else
                         a(href=`/users/${user._id}`).user_menu
-                            img.header__avatar(src=user.avatar)
+                            img.header__avatar(src=user.avatar crossorigin)
                             span=user.email
                 li
                     a(href="/videos/upload") Upload Video
