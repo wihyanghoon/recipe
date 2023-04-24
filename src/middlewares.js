@@ -12,13 +12,13 @@ const s3 = new aws.S3({
 
 const s3Images = multerS3({
   s3: s3,
-  bucket: "recipevideodb-image",
+  bucket: "recipevideodb",
   acl: "public-read",
 });
 
 const s3Videos = multerS3({
   s3: s3,
-  bucket: "recipevideodb-video",
+  bucket: "recipevideodb",
   acl: "public-read",
 });
 
@@ -53,10 +53,10 @@ export const uploadProfile = multer({
   limits: {
     fileSize: 3.146e7,
   },
-  storage: isDeploy ? s3Images : undefined,
+  storage: s3Images
 });
 
 export const uploadVideo = multer({
   dest: "uploads/videos/",
-  storage: isDeploy ? s3Videos : undefined,
+  storage: s3Images
 });
