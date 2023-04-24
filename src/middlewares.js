@@ -2,6 +2,8 @@ import multer from "multer";
 import multerS3 from "multer-s3";
 import aws from "aws-sdk";
 
+export const isDeploy = process.env.NODE_ENV === "production";
+
 const s3 = new aws.S3({
   region: "ap-northeast-2",
   accessKeyId: process.env.AWS_ID,
@@ -20,7 +22,7 @@ const s3Videos = multerS3({
   acl: "public-read",
 });
 
-export const isDeploy = process.env.NODE_ENV === "production";
+
 
 export const localsMiddleware = (req, res, next) => {
   res.locals.loggedIn = Boolean(req.session.loggedIn);
