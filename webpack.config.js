@@ -8,14 +8,12 @@ module.exports = {
   plugins: [new MiniCssExtractPlugin({
     filename: "css/styles.css",
   })],
-  watch: true,
   entry: {
     main: `${BASE_JS}/main.js`,
     videoPlayer : `${BASE_JS}/videoPlayer.js`,
     recorder : `${BASE_JS}/recorder.js`,
     comment : `${BASE_JS}/comment.js`,
   },
-  mode: "development",
   output: {
     filename: "js/[name].js",
     path: path.resolve(__dirname, "assets"),

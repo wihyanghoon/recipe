@@ -3,7 +3,7 @@ const textarea = form.querySelector("input");
 const btn = form.querySelector("button");
 const videoContainer = document.getElementById("videoContainer");
 const comment__wrap = document.querySelector(".comment__wrap");
-const comment__delete = document.querySelector(".comment__delete");
+const comment__delete = document.querySelectorAll(".comment__delete");
 
 const comments__wrap = document.querySelector(".comments__wrap ul");
 
@@ -21,7 +21,7 @@ const upDateComente = (text, comment) => {
   li.dataset.id = _id;
   img.className = "comment__img";
   div.className = "comment__text";
-  deleteWrap.className = "comment__delete"
+  deleteWrap.className = "comment__delete";
   a.innerText = owner.email;
   a.href = `/users/${owner._id}`;
   img.src = owner.avatar;
@@ -29,11 +29,11 @@ const upDateComente = (text, comment) => {
   comments__wrap.prepend(li);
   li.appendChild(img);
   li.appendChild(div);
-  li.appendChild(deleteWrap)
+  li.appendChild(deleteWrap);
   div.appendChild(a);
   div.appendChild(p);
   deleteWrap.appendChild(span);
-  deleteWrap.addEventListener("click", deleteHandler)
+  deleteWrap.addEventListener("click", deleteHandler);
   p.innerText = text;
 };
 
@@ -59,9 +59,9 @@ const submitHandler = async (event) => {
   upDateComente(text, json.comment);
 };
 
-const deleteHandler = () => {
+const deleteHandler = (event) => {
   const { id } = videoContainer.dataset;
-  const { id: commentId } = comment__wrap.dataset;
+  const { id: commentId } = event.target.parentNode.dataset;
 
   fetch(`/api/videos/${id}/comment/${commentId}/delete`, {
     method: "POST",
@@ -70,5 +70,6 @@ const deleteHandler = () => {
 
 btn.addEventListener("click", submitHandler);
 
-
-comment__delete.addEventListener("click", deleteHandler);
+for (let i = 0; i < comment__delete.length; i++) {
+  comment__delete[i].addEventListener("click", deleteHandler);
+}

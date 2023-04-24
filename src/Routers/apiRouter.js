@@ -2,6 +2,7 @@ import express from "express";
 import Video from "../models/Video";
 import Comment from "../models/Comment";
 import User from "../models/User";
+import mongoose from "mongoose";
 
 const router = express.Router();
 
@@ -65,9 +66,10 @@ router.post("/videos/:id([0-9a-f]{24})/comment/:commentId([0-9a-f]{24})/delete",
   await Comment.findByIdAndDelete(commentId)
 
   const video = await Video.findById(id)
-  video.comments.pop(commentId)
+  // video.comments.pop(commentId)
+  const newArr = video.comments.filter((comment) => comment.toString() !== commentId)
+  video.comments = newArr
   video.save()
-
 
   res.sendStatus(200);
 });
