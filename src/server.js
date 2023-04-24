@@ -42,7 +42,13 @@ app.use("/static", express.static("assets")) // 웹팩에 사용한 폴더를 �
 app.get("/add-one", (req, res, next) => {
   return res.send(`${req.session.id}`);
 });
-
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.header(
+  "Access-Control-Allow-Headers",
+  "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  })
 //Routers
 app.use("/", globalRouter);
 app.use("/users", userRouter);
