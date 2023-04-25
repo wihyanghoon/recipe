@@ -5,12 +5,12 @@
 2023.04 ~ 2023.04.26
 
 #### 프로젝트 설명
-디자이너 출신인 저의 아이덴티티를 살리기 위해 포토샵 레이아웃, 디자인을 그대로 옮겨
-개인 포트폴리오 사이트를 제작 해보고 싶어 기획하고 제작하게 되었습니다.
+깔끔한 ui의 비디오 업로드 사이트, 템플린 엣진을 사용하여 제작하였습니다.
 
 #### 프로젝트 기능
-모든 기능을 바닐라 자바스크립트를 이용하여 제작하였습니다.
-쿼리값을 이용하여 해당값에 일치하는 데이터를 찾아서 값을 출력하는 상세보기 페이지 구현.
+반응형, session 로그인, 조건부 랜더링 및 실시간 엘리먼트 랜더링과 회원가입, 로그인, 로그아웃, 소셜로그인
+비디오 및 이미지 업로드, 비밀번호 변경, 동영상 검색
+
 
 #### 프로젝트 URL
 https://recipevideo.herokuapp.com/
@@ -20,12 +20,13 @@ https://recipevideo.herokuapp.com/
 | :------: |
 | [<img src="https://user-images.githubusercontent.com/66665468/221801579-e6654496-2ef9-47cc-b8be-be606858025b.jpg" width=150> <br/> @wihyanghoon](https://github.com/wihyanghoon) |
 
-## Tech Stack
-|사용처|스택|
-|:---:|:---:|
-|Front-end|Javascript|
-
-## Groupware
-|프로그램|내용|
+## Library
+|라이브러리|사용처|
 |:---|:---|
-|git|소스코드 관리(파일 병합, 로그 관리)|
+|dotenv|환경변수|
+|mongoose|데이터베이스, 모델스키마|
+|babel|자바스크립트 구버전 인코딩|
+|express-session|로그인 세션|
+|multer|이미지 업로드|
+|multer-s3|s3 버킷 사용|
+|bcrypt|암호 해쉬화|
