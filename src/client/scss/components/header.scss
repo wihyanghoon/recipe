@@ -25,7 +25,6 @@ header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 45px;
       li {
         margin-left: 30px;
         font-size: 14px;
@@ -67,6 +66,7 @@ header {
     position: absolute;
     top: 25px;
     right: 30px;
+    cursor: pointer;
   }
   ul {
     display: grid;
@@ -74,6 +74,7 @@ header {
     grid-template-columns: 1fr;
     grid-template-rows: 100px;
     grid-auto-rows: 100px;
+    margin-top: 45px;
     li {
       margin-left: 30px;
       font-size: 14px;
@@ -117,6 +118,7 @@ header {
 @media screen and (max-width:700px) {
   #hamberger {
     display: block;
+    cursor: pointer;
   }
 
   .mobile_nav{
