@@ -30,3 +30,4 @@ https://recipevideo.herokuapp.com/
 |multer|이미지 업로드|
 |multer-s3|s3 버킷 사용|
 |bcrypt|암호 해쉬화|
+|webpack|번들링|
