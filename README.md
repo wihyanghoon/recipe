@@ -1,12 +1,31 @@
-### API 설계
+## Recipe Video (비디오 업로드 웹사이트)
+![photoshop01](https://user-images.githubusercontent.com/66665468/225891581-d5ffae10-76f6-4649-8742-9b9ee9d9da0a.jpg)
 
-#### Home
-로그인 /user/login
-로그아웃 /user/logout
-프로필 수정 /user/edit
-유저삭제 /user/delete
-유저 불러오기 /user/:id
+#### 프로젝트 기간
+2023.04 ~ 2023.04.26
 
-동영상 업로드 /video
-동영상 삭제 /video/delete
-동영상 수정 /video/edit
+#### 프로젝트 설명
+디자이너 출신인 저의 아이덴티티를 살리기 위해 포토샵 레이아웃, 디자인을 그대로 옮겨
+개인 포트폴리오 사이트를 제작 해보고 싶어 기획하고 제작하게 되었습니다.
+
+#### 프로젝트 기능
+모든 기능을 바닐라 자바스크립트를 이용하여 제작하였습니다.
+쿼리값을 이용하여 해당값에 일치하는 데이터를 찾아서 값을 출력하는 상세보기 페이지 구현.
+
+#### 프로젝트 URL
+https://recipevideo.herokuapp.com/
+
+## 팀원 구성
+| **위향훈(프론트엔드)** |
+| :------: |
+| [<img src="https://user-images.githubusercontent.com/66665468/221801579-e6654496-2ef9-47cc-b8be-be606858025b.jpg" width=150> <br/> @wihyanghoon](https://github.com/wihyanghoon) |
+
+## Tech Stack
+|사용처|스택|
+|:---:|:---:|
+|Front-end|Javascript|
+
+## Groupware
+|프로그램|내용|
+|:---|:---|
+|git|소스코드 관리(파일 병합, 로그 관리)|
