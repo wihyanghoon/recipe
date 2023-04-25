@@ -19,6 +19,7 @@ const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
 
 if(isIOS){
   video.setAttribute('controls', true);
+  videoControls.style.display = "none"
 }
 //전역변수
 let timeOutId = null;
