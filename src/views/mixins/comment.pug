@@ -4,6 +4,6 @@ mixin comment(info)
         div.comment__text
             a(href=`/users/${info.owner._id}`) #{info.owner.email}
             p=info.text
-        if String(info.owner._id) === String(user._id)
+        if String(info.owner._id) === String(loginUser._id)
             div.comment__delete
                 span

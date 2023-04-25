@@ -6,14 +6,14 @@ block content
         label(for="avatar") Avatar
         input(type="file", id="avatar", name="avatar", accept="image/*")
         label(for="name") NAME
-        input(placeholder="Name", id="name" name="name", type="text", required, value=user.name)
+        input(placeholder="Name", id="name" name="name", type="text", required, value=loginUser.name)
         label(for="email") E-MAIL
-        input(placeholder="Email", id="email" name="email", type="email", required, value=user.email)
+        input(placeholder="Email", id="email" name="email", type="email", required, value=loginUser.email)
         label(for="username") USER NAME
-        input(placeholder="Username", id="username" name="username", type="text", required, value=user.username)
+        input(placeholder="Username", id="username" name="username", type="text", required, value=loginUser.username)
         label(for="location") LOCATION
-        input(placeholder="Location", id="location" name="location", type="text", required, value=user.location)
+        input(placeholder="Location", id="location" name="location", type="text", required, value=loginUser.location)
         input(type="submit", value="Update Profile").profile__submit
-        if !user.socialOnly
+        if !loginUser.socialOnly
             div.edit-profile__password
                 a(href="change-password") Change Password &rarr;

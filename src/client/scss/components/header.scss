@@ -16,16 +16,24 @@ header {
   .header__logo {
     color: $point;
     font-size: 38px;
+
+    img{
+      width: 120px;
+    }
   }
     ul {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-top: 45px;
       li {
         margin-left: 30px;
         font-size: 14px;
         font-weight: 600;
         text-transform: uppercase;
+      }
+      li:nth-child(1){
+        text-transform: lowercase;
       }
       i {
         font-size: 16px;

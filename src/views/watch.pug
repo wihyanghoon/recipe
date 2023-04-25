@@ -29,7 +29,7 @@ block content
                 a(href=`/users/${video.owner._id}`)=video.owner.name
                 small Upload #{video.owner.videos.length}
     
-    if String(video.owner._id) === String(user._id)
+    if String(video.owner._id) === String(loginUser._id)
         div.sub_button
             a(href=`${video.id}/edit`) Edit Video &rarr;
             br

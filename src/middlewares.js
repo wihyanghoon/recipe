@@ -28,7 +28,7 @@ const s3Videos = multerS3({
 export const localsMiddleware = (req, res, next) => {
   res.locals.loggedIn = Boolean(req.session.loggedIn);
   res.locals.sitename = "Youtube";
-  res.locals.user = req.session.user || {};
+  res.locals.loginUser = req.session.user || {};
 
   next();
 };

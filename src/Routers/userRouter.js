@@ -2,7 +2,7 @@ import express from "express";
 import User from "../models/User";
 import Video from "../models/Video"
 import fetch from "node-fetch";
-import { isLoggedIn, uploadProfile, } from "../middlewares";
+import { isLoggedIn, uploadProfile, isDeploy } from "../middlewares";
 import bcrypt from "bcrypt"
 
 const router = express.Router();
@@ -125,7 +125,7 @@ router.post("/edit", isLoggedIn, uploadProfile.single("avatar"), async (req, res
 
   const update = await User.findOneAndUpdate(
     { email: sessionEmail },
-    { name, location, avatar: file ? `${file.location}` : "" },
+    { name, location, avatar: file ? (isDeploy ? file.location : `/${file.path}`) : "" },
     { new: true }
   );
   req.session.user = update;
