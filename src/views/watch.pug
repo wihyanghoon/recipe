@@ -3,9 +3,6 @@ include mixins/comment
 
 block content
     div#videoContainer(data-id=video._id)
-    if /iPhone|iPad|iPod/.test(navigator.userAgent)
-        video(src=video.fileUrl crossorigin controls)
-    else
         video(src=video.fileUrl crossorigin autoplay)
         div#videoControls.videoControls
             div.videoControls__play

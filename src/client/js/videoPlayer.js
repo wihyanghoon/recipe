@@ -13,6 +13,13 @@ const fullScreenIcon = fullScreenBtn.querySelector("i");
 const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
 
+
+const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+
+
+if(isIOS){
+  video.setAttribute('controls', true);
+}
 //전역변수
 let timeOutId = null;
 let controlMove = null;
