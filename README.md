@@ -1,5 +1,5 @@
 ## Recipe Video (비디오 업로드 웹사이트)
-![photoshop01](https://user-images.githubusercontent.com/66665468/225891581-d5ffae10-76f6-4649-8742-9b9ee9d9da0a.jpg)
+![recipe02](https://user-images.githubusercontent.com/66665468/234598890-067c0ddc-0ae3-4115-9eda-6e6ff9cc1c2a.jpg)
 
 #### 프로젝트 기간
 2023.04 ~ 2023.04.26
